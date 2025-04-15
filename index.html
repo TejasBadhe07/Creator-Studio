@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorStudio - AI-Powered Content Creation Suite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-magic"></i>
+                <span>CreatorStudio</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#content">
+                        <i class="fas fa-pen-fancy"></i>
+                        <span>Content</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#schedule">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Schedule</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#ai-tools">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Tools</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40" alt="User">
+                <div class="user-info">
+                    <span class="username">John Doe</span>
+                    <span class="user-role">Content Creator</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="top-actions">
+                    <button class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard content-section active" id="dashboard">
+                <div class="welcome-section">
+                    <h1>Welcome back, John!</h1>
+                    <p>Here's what's happening with your content today.</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon views">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Views</h3>
+                            <p class="stat-value">24.5K</p>
+                            <span class="stat-change positive">+12%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon engagement">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Engagement</h3>
+                            <p class="stat-value">8.2K</p>
+                            <span class="stat-change positive">+8%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon followers">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Followers</h3>
+                            <p class="stat-value">15.3K</p>
+                            <span class="stat-change positive">+5%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon content">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Content</h3>
+                            <p class="stat-value">42</p>
+                            <span class="stat-change positive">+3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="performance-chart">
+                    <div class="chart-header">
+                        <h2>Performance Overview</h2>
+                        <div class="chart-actions">
+                            <button class="btn-secondary active" data-period="week">Week</button>
+                            <button class="btn-secondary" data-period="month">Month</button>
+                            <button class="btn-secondary" data-period="year">Year</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Content Calendar -->
+                <div class="content-calendar">
+                    <h2>Content Calendar</h2>
+                    <div class="calendar-grid">
+                        <!-- Calendar will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- AI Suggestions -->
+                <div class="ai-suggestions">
+                    <h2>AI-Powered Suggestions</h2>
+                    <div class="suggestions-grid">
+                        <div class="suggestion-card">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Content Ideas</h3>
+                            <p>5 trending topics for your next post</p>
+                            <button class="btn-primary">View Ideas</button>
+                        </div>
+                        <div class="suggestion-card">
+                            <i class="fas fa-hashtag"></i>
+                            <h3>Hashtag Suggestions</h3>
+                            <p>Optimize your reach with these tags</p>
+                            <button class="btn-primary">Get Tags</button>
+                        </div>
+                        <div class="suggestion-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Best Time to Post</h3>
+                            <p>Optimal posting schedule for today</p>
+                            <button class="btn-primary">View Schedule</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Creation Section -->
+            <div class="content-section" id="content">
+                <div class="section-header">
+                    <h1>Content Creation</h1>
+                    <p>Create and manage your content across platforms</p>
+                </div>
+                <div class="content-tools">
+                    <div class="tool-card">
+                        <i class="fas fa-edit"></i>
+                        <h3>Text Editor</h3>
+                        <p>Create and edit text content</p>
+                        <button class="btn-primary" data-editor="text">Start Writing</button>
+                    </div>
+                    <div class="tool-card">
+                        <i class="fas fa-image"></i>
+                        <h3>Image Editor</h3>
+                        <p>Edit and optimize images</p>
+                        <button class="btn-primary" data-editor="image">Edit Images</button>
+                    </div>
+                    <div class="tool-card">
+                        <i class="fas fa-video"></i>
+                        <h3>Video Editor</h3>
+                        <p>Create and edit videos</p>
+                        <button class="btn-primary" data-editor="video">Edit Videos</button>
+                    </div>
+                </div>
+
+                <!-- Text Editor Modal -->
+                <div class="editor-modal" id="textEditor">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Text Editor</h2>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="editor-toolbar">
+                                <button class="toolbar-btn" data-command="bold"><i class="fas fa-bold"></i></button>
+                                <button class="toolbar-btn" data-command="italic"><i class="fas fa-italic"></i></button>
+                                <button class="toolbar-btn" data-command="underline"><i class="fas fa-underline"></i></button>
+                                <div class="toolbar-separator"></div>
+                                <button class="toolbar-btn" data-command="justifyLeft"><i class="fas fa-align-left"></i></button>
+                                <button class="toolbar-btn" data-command="justifyCenter"><i class="fas fa-align-center"></i></button>
+                                <button class="toolbar-btn" data-command="justifyRight"><i class="fas fa-align-right"></i></button>
+                                <div class="toolbar-separator"></div>
+                                <button class="toolbar-btn" data-command="insertUnorderedList"><i class="fas fa-list-ul"></i></button>
+                                <button class="toolbar-btn" data-command="insertOrderedList"><i class="fas fa-list-ol"></i></button>
+                            </div>
+                            <div class="editor-content" contenteditable="true"></div>
+                            <div class="ai-suggestions">
+                                <h4>AI Suggestions</h4>
+                                <div class="suggestion-chips">
+                                    <button class="suggestion-chip">Improve Readability</button>
+                                    <button class="suggestion-chip">Fix Grammar</button>
+                                    <button class="suggestion-chip">Make it Engaging</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-secondary">Save Draft</button>
+                            <button class="btn-primary">Publish</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Editor Modal -->
+                <div class="editor-modal" id="imageEditor">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Image Editor</h2>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="image-upload-area" id="imageUpload">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & Drop images here or <span class="upload-btn">Browse</span></p>
+                                <input type="file" hidden accept="image/*" multiple>
+                            </div>
+                            <div class="image-preview" style="display: none;">
+                                <img id="previewImage" src="" alt="Preview">
+                                <div class="image-controls">
+                                    <button class="control-btn" data-control="brightness"><i class="fas fa-sun"></i> Brightness</button>
+                                    <button class="control-btn" data-control="contrast"><i class="fas fa-adjust"></i> Contrast</button>
+                                    <button class="control-btn" data-control="saturation"><i class="fas fa-palette"></i> Saturation</button>
+                                    <button class="control-btn" data-control="crop"><i class="fas fa-crop"></i> Crop</button>
+                                </div>
+                                <div class="control-sliders">
+                                    <div class="slider-control">
+                                        <label>Brightness</label>
+                                        <input type="range" min="0" max="200" value="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-secondary">Reset</button>
+                            <button class="btn-primary">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Editor Modal -->
+                <div class="editor-modal" id="videoEditor">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Video Editor</h2>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="video-upload-area" id="videoUpload">
+                                <i class="fas fa-film"></i>
+                                <p>Drag & Drop video here or <span class="upload-btn">Browse</span></p>
+                                <input type="file" hidden accept="video/*">
+                            </div>
+                            <div class="video-preview" style="display: none;">
+                                <video id="previewVideo" controls>
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div class="video-timeline">
+                                    <div class="timeline-track"></div>
+                                    <div class="timeline-handle"></div>
+                                </div>
+                                <div class="video-controls">
+                                    <button class="control-btn" data-control="trim"><i class="fas fa-cut"></i> Trim</button>
+                                    <button class="control-btn" data-control="filter"><i class="fas fa-filter"></i> Filters</button>
+                                    <button class="control-btn" data-control="text"><i class="fas fa-text"></i> Add Text</button>
+                                    <button class="control-btn" data-control="audio"><i class="fas fa-music"></i> Audio</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-secondary">Reset</button>
+                            <button class="btn-primary">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheduling Section -->
+            <div class="content-section" id="schedule">
+                <div class="section-header">
+                    <h1>Content Scheduling</h1>
+                    <p>Plan and schedule your content</p>
+                </div>
+                <div class="schedule-grid">
+                    <div class="schedule-calendar">
+                        <div class="calendar-header">
+                            <h3>Schedule Calendar</h3>
+                            <div class="calendar-controls">
+                                <button class="btn-icon" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                                <span class="current-month">March 2024</span>
+                                <button class="btn-icon" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-weekdays">
+                                <span>Sun</span>
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thu</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                            </div>
+                            <div class="calendar-days">
+                                <!-- Calendar days will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="schedule-queue">
+                        <div class="queue-header">
+                            <h3>Content Queue</h3>
+                            <button class="btn-primary" id="addToQueue">
+                                <i class="fas fa-plus"></i> Add Content
+                            </button>
+                        </div>
+                        <div class="queue-filters">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="scheduled">Scheduled</button>
+                            <button class="filter-btn" data-filter="draft">Drafts</button>
+                        </div>
+                        <div class="queue-list">
+                            <div class="queue-item">
+                                <div class="queue-content">
+                                    <div class="content-type">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="queue-details">
+                                        <h4>Blog Post: AI Trends</h4>
+                                        <p class="queue-meta">
+                                            <span class="schedule-time">Today, 2:00 PM</span>
+                                            <span class="content-status scheduled">Scheduled</span>
+                                        </p>
+                                        <div class="content-platforms">
+                                            <span class="platform-tag">Blog</span>
+                                            <span class="platform-tag">Twitter</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Reschedule"><i class="fas fa-calendar-alt"></i></button>
+                                    <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="queue-item">
+                                <div class="queue-content">
+                                    <div class="content-type">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div class="queue-details">
+                                        <h4>Instagram Post</h4>
+                                        <p class="queue-meta">
+                                            <span class="schedule-time">Tomorrow, 10:00 AM</span>
+                                            <span class="content-status draft">Draft</span>
+                                        </p>
+                                        <div class="content-platforms">
+                                            <span class="platform-tag">Instagram</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="queue-actions">
+                                    <button class="btn-icon" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon" title="Reschedule"><i class="fas fa-calendar-alt"></i></button>
+                                    <button class="btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div class="content-section" id="analytics">
+                <div class="section-header">
+                    <h1>Analytics Dashboard</h1>
+                    <p>Track your content performance</p>
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytics-chart">
+                        <div class="chart-header">
+                            <h3>Engagement Trends</h3>
+                            <div class="chart-actions">
+                                <button class="btn-secondary active" data-period="week">Week</button>
+                                <button class="btn-secondary" data-period="month">Month</button>
+                                <button class="btn-secondary" data-period="year">Year</button>
+                                <button class="btn-icon" id="exportAnalytics">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="analyticsChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <div class="legend-color likes"></div>
+                                <span>Likes</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color comments"></div>
+                                <span>Comments</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color shares"></div>
+                                <span>Shares</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analytics-metrics">
+                        <h3>Key Metrics</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Growth Rate</h4>
+                                <p class="metric-value">+15%</p>
+                                <span class="metric-period">vs last month</span>
+                            </div>
+                            <div class="metric-card">
+                                <i class="fas fa-users"></i>
+                                <h4>New Followers</h4>
+                                <p class="metric-value">+1.2K</p>
+                                <span class="metric-period">this month</span>
+                            </div>
+                            <div class="metric-card">
+                                <i class="fas fa-comments"></i>
+                                <h4>Comments</h4>
+                                <p class="metric-value">+450</p>
+                                <span class="metric-period">this week</span>
+                            </div>
+                            <div class="metric-card">
+                                <i class="fas fa-share"></i>
+                                <h4>Shares</h4>
+                                <p class="metric-value">+320</p>
+                                <span class="metric-period">this week</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="audience-demographics">
+                        <h3>Audience Demographics</h3>
+                        <div class="demographics-grid">
+                            <div class="demographic-chart">
+                                <h4>Age Distribution</h4>
+                                <canvas id="ageChart"></canvas>
+                            </div>
+                            <div class="demographic-chart">
+                                <h4>Gender Distribution</h4>
+                                <canvas id="genderChart"></canvas>
+                            </div>
+                            <div class="demographic-chart">
+                                <h4>Location</h4>
+                                <div class="location-list">
+                                    <div class="location-item">
+                                        <span>United States</span>
+                                        <span class="location-percentage">35%</span>
+                                    </div>
+                                    <div class="location-item">
+                                        <span>United Kingdom</span>
+                                        <span class="location-percentage">25%</span>
+                                    </div>
+                                    <div class="location-item">
+                                        <span>India</span>
+                                        <span class="location-percentage">20%</span>
+                                    </div>
+                                    <div class="location-item">
+                                        <span>Others</span>
+                                        <span class="location-percentage">20%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-performance">
+                        <h3>Content Performance</h3>
+                        <div class="performance-filters">
+                            <button class="btn-secondary active" data-type="all">All Content</button>
+                            <button class="btn-secondary" data-type="posts">Posts</button>
+                            <button class="btn-secondary" data-type="videos">Videos</button>
+                            <button class="btn-secondary" data-type="stories">Stories</button>
+                        </div>
+                        <div class="performance-list">
+                            <div class="performance-item">
+                                <div class="content-info">
+                                    <i class="fas fa-image"></i>
+                                    <div class="content-details">
+                                        <h4>Summer Collection Launch</h4>
+                                        <span class="content-date">Posted 2 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="performance-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Engagement</span>
+                                        <span class="metric-value">2.4K</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Reach</span>
+                                        <span class="metric-value">15.7K</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">CTR</span>
+                                        <span class="metric-value">3.2%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- More performance items will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Tools Section -->
+            <div class="content-section" id="ai-tools">
+                <div class="section-header">
+                    <h1>AI-Powered Tools</h1>
+                    <p>Leverage AI to enhance your content</p>
+                </div>
+                <div class="ai-tools-grid">
+                    <div class="ai-tool-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Content Ideas</h3>
+                        <p>Generate trending content ideas</p>
+                        <button class="btn-primary">Generate Ideas</button>
+                    </div>
+                    <div class="ai-tool-card">
+                        <i class="fas fa-magic"></i>
+                        <h3>Content Optimization</h3>
+                        <p>Optimize your content for better reach</p>
+                        <button class="btn-primary">Optimize</button>
+                    </div>
+                    <div class="ai-tool-card">
+                        <i class="fas fa-hashtag"></i>
+                        <h3>Hashtag Generator</h3>
+                        <p>Find the best hashtags for your posts</p>
+                        <button class="btn-primary">Generate Tags</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/schedule.js"></script>
+</body>
+</html> 
