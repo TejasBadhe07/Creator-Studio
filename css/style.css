@@ -773,17 +773,139 @@ body::after {
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
     display: none;
-    background: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1000;
+    background: var(--primary);
+    color: white;
     border: none;
-    font-size: 1.5rem;
-    color: var(--text-light);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
-    padding: 0.5rem;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
 }
 
-@media (max-width: 1024px) {
+.mobile-menu-toggle:hover {
+    background: var(--primary-dark);
+}
+
+.close-sidebar {
+    display: none;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Sidebar Mobile Styles */
+@media (max-width: 768px) {
     .mobile-menu-toggle {
         display: block;
+    }
+
+    .close-sidebar {
+        display: block;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        height: 100vh;
+        width: 80%;
+        max-width: 300px;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .top-bar {
+        padding: 1rem;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .top-actions {
+        display: none;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .content-calendar {
+        padding: 1rem;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.5rem;
+    }
+
+    .suggestions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) {
+    .nav-links li a:hover::before,
+    .stat-card:hover::before,
+    .suggestion-card:hover::before,
+    .format-option:hover::before {
+        transform: none;
+    }
+
+    .nav-links li a,
+    .stat-card,
+    .suggestion-card,
+    .format-option {
+        cursor: pointer;
+    }
+}
+
+/* Small screen optimizations */
+@media (max-width: 480px) {
+    .logo span {
+        display: none;
+    }
+
+    .nav-links li a span {
+        display: none;
+    }
+
+    .nav-links li a i {
+        font-size: 1.5rem;
+        margin-right: 0;
+    }
+
+    .stat-card,
+    .suggestion-card {
+        padding: 1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
     }
 }
 
