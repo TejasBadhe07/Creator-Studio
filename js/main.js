@@ -757,4 +757,411 @@ style.textContent = `
         z-index: 1100;
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// Generate Ideas Flow
+document.addEventListener('DOMContentLoaded', () => {
+    const generateIdeasBtn = document.querySelector('.generate-ideas-btn');
+    const ideasModal = document.getElementById('ideas-modal');
+    const closeModalBtn = ideasModal.querySelector('.close-modal');
+    const cancelBtn = ideasModal.querySelector('#cancel-btn');
+    const generateBtn = ideasModal.querySelector('#generate-btn');
+    const ideaSteps = ideasModal.querySelectorAll('.idea-step');
+    const progressFill = ideasModal.querySelector('.progress-fill');
+    const progressText = ideasModal.querySelector('.progress-text');
+    const generatedIdeasContainer = ideasModal.querySelector('.generated-ideas');
+    const refreshBtn = ideasModal.querySelector('.refresh-btn');
+    const saveAllBtn = ideasModal.querySelector('.save-all-btn');
+
+    // Open modal
+    generateIdeasBtn.addEventListener('click', () => {
+        ideasModal.classList.add('active');
+        showStep('step-requirements');
+    });
+
+    // Close modal
+    function closeModal() {
+        ideasModal.classList.remove('active');
+        resetForm();
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+
+    // Show specific step
+    function showStep(stepId) {
+        ideaSteps.forEach(step => {
+            step.classList.remove('active');
+            if (step.id === stepId) {
+                step.classList.add('active');
+            }
+        });
+    }
+
+    // Reset form
+    function resetForm() {
+        const form = ideasModal.querySelector('.ideas-form');
+        form.reset();
+        generatedIdeasContainer.innerHTML = '';
+        progressFill.style.width = '0%';
+        progressText.textContent = '0%';
+    }
+
+    // Generate ideas
+    generateBtn.addEventListener('click', async () => {
+        const form = ideasModal.querySelector('.ideas-form');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Validate required fields
+        if (!data.topic || !data['content-type'] || !data.tone) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        // Show generating step
+        showStep('step-generating');
+
+        // Simulate generation process
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 5;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${progress}%`;
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    showStep('step-results');
+                    displayGeneratedIdeas(data);
+                }, 500);
+            }
+        }, 200);
+    });
+
+    // Display generated ideas
+    function displayGeneratedIdeas(data) {
+        // This is a mock implementation - in a real app, this would come from an API
+        const ideas = [
+            {
+                type: data['content-type'],
+                title: `5 Ways to Master ${data.topic}`,
+                description: `A comprehensive guide to mastering ${data.topic} with practical tips and strategies.`,
+                format: 'List Format',
+                tone: data.tone
+            },
+            {
+                type: data['content-type'],
+                title: `The Ultimate ${data.topic} Guide for Beginners`,
+                description: `Everything you need to know about ${data.topic} as a beginner.`,
+                format: 'How-to Guide',
+                tone: data.tone
+            },
+            {
+                type: data['content-type'],
+                title: `${data.topic} Tips and Tricks You Need to Know`,
+                description: `Expert tips and tricks to help you excel in ${data.topic}.`,
+                format: 'Tips & Tricks',
+                tone: data.tone
+            }
+        ];
+
+        generatedIdeasContainer.innerHTML = ideas.map(idea => `
+            <div class="idea-card">
+                <div class="idea-header">
+                    <span class="idea-type">${idea.type}</span>
+                    <div class="idea-actions">
+                        <button class="copy-btn" title="Copy">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="save-btn" title="Save">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+                <h4 class="idea-title">${idea.title}</h4>
+                <p class="idea-description">${idea.description}</p>
+                <div class="idea-meta">
+                    <span class="idea-format">
+                        <i class="fas fa-list"></i>
+                        ${idea.format}
+                    </span>
+                    <span class="idea-tone">
+                        <i class="fas fa-comment"></i>
+                        ${idea.tone}
+                    </span>
+                </div>
+            </div>
+        `).join('');
+
+        // Add event listeners to new buttons
+        addIdeaCardEventListeners();
+    }
+
+    // Add event listeners to idea card buttons
+    function addIdeaCardEventListeners() {
+        const copyButtons = generatedIdeasContainer.querySelectorAll('.copy-btn');
+        const saveButtons = generatedIdeasContainer.querySelectorAll('.save-btn');
+
+        copyButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const ideaCard = btn.closest('.idea-card');
+                const title = ideaCard.querySelector('.idea-title').textContent;
+                const description = ideaCard.querySelector('.idea-description').textContent;
+                
+                navigator.clipboard.writeText(`${title}\n\n${description}`)
+                    .then(() => {
+                        btn.innerHTML = '<i class="fas fa-check"></i>';
+                        setTimeout(() => {
+                            btn.innerHTML = '<i class="fas fa-copy"></i>';
+                        }, 2000);
+                    });
+            });
+        });
+
+        saveButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-bookmark"></i>';
+                }, 2000);
+            });
+        });
+    }
+
+    // Refresh ideas
+    refreshBtn.addEventListener('click', () => {
+        const form = ideasModal.querySelector('.ideas-form');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        displayGeneratedIdeas(data);
+    });
+
+    // Save all ideas
+    saveAllBtn.addEventListener('click', () => {
+        const ideaCards = generatedIdeasContainer.querySelectorAll('.idea-card');
+        ideaCards.forEach(card => {
+            const saveBtn = card.querySelector('.save-btn');
+            saveBtn.innerHTML = '<i class="fas fa-check"></i>';
+        });
+    });
+});
+
+// Optimization Modal Functionality
+const optimizeBtn = document.getElementById('optimize-btn');
+const optimizeModal = document.getElementById('optimize-modal');
+const closeOptimizeModal = optimizeModal.querySelector('.close-modal');
+const cancelOptimizeBtn = document.getElementById('cancel-optimize-btn');
+const startOptimizeBtn = document.getElementById('start-optimize-btn');
+const optimizationSteps = document.querySelectorAll('.optimization-step');
+const optimizationFlow = document.querySelector('.optimization-flow');
+
+// Open optimization modal
+optimizeBtn.addEventListener('click', () => {
+    optimizeModal.classList.add('active');
+    showStep('step-input');
+});
+
+// Close optimization modal
+function closeOptimizeModalHandler() {
+    optimizeModal.classList.remove('active');
+    showStep('step-input');
+    // Reset form
+    document.querySelector('.optimization-form').reset();
+}
+
+closeOptimizeModal.addEventListener('click', closeOptimizeModalHandler);
+cancelOptimizeBtn.addEventListener('click', closeOptimizeModalHandler);
+
+// Show specific step
+function showStep(stepId) {
+    optimizationSteps.forEach(step => {
+        step.classList.remove('active');
+        if (step.id === stepId) {
+            step.classList.add('active');
+        }
+    });
+}
+
+// Start optimization process
+startOptimizeBtn.addEventListener('click', () => {
+    const contentText = document.getElementById('content-text').value;
+    const contentType = document.getElementById('content-type').value;
+    const targetPlatform = document.getElementById('target-platform').value;
+
+    if (!contentText.trim()) {
+        alert('Please enter content to optimize');
+        return;
+    }
+
+    showStep('step-optimizing');
+    
+    // Simulate optimization process
+    let currentStep = 0;
+    const steps = document.querySelectorAll('.optimization-steps .optimization-step');
+    
+    const optimizationInterval = setInterval(() => {
+        if (currentStep < steps.length) {
+            steps[currentStep].classList.add('active');
+            currentStep++;
+        } else {
+            clearInterval(optimizationInterval);
+            setTimeout(() => {
+                showStep('step-results');
+            }, 1000);
+        }
+    }, 1500);
+});
+
+// Initialize Generate Tags functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Generate Tags Modal Functionality
+    const tagsModal = document.getElementById('tags-modal');
+    const generateTagsBtn = document.querySelector('.generate-tags-btn');
+    const cancelTagsBtn = document.getElementById('cancel-tags-btn');
+    const generateTagsSubmitBtn = document.getElementById('generate-tags-btn');
+    const closeTagsModal = tagsModal.querySelector('.close-modal');
+
+    if (!tagsModal || !generateTagsBtn || !cancelTagsBtn || !generateTagsSubmitBtn || !closeTagsModal) {
+        console.error('Required elements for Generate Tags modal not found');
+        return;
+    }
+
+    // Open Generate Tags Modal
+    generateTagsBtn.addEventListener('click', () => {
+        console.log('Generate Tags button clicked');
+        tagsModal.classList.add('active');
+        showTagsStep('step-input');
+    });
+
+    // Close Generate Tags Modal
+    function closeTagsModalHandler() {
+        tagsModal.classList.remove('active');
+        resetTagsForm();
+    }
+
+    closeTagsModal.addEventListener('click', closeTagsModalHandler);
+    cancelTagsBtn.addEventListener('click', closeTagsModalHandler);
+
+    // Show specific step in tags generation flow
+    function showTagsStep(stepId) {
+        const steps = document.querySelectorAll('.tags-step');
+        steps.forEach(step => {
+            step.classList.remove('active');
+        });
+        document.getElementById(stepId).classList.add('active');
+    }
+
+    // Reset tags form
+    function resetTagsForm() {
+        document.querySelector('.tags-form').reset();
+        const formatOptions = document.querySelectorAll('.format-option');
+        formatOptions.forEach(option => {
+            option.classList.remove('active');
+        });
+    }
+
+    // Handle format option selection
+    const formatOptions = document.querySelectorAll('.format-option');
+    formatOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            option.classList.toggle('active');
+        });
+    });
+
+    // Generate hashtags
+    generateTagsSubmitBtn.addEventListener('click', () => {
+        const contentText = document.getElementById('content-text').value;
+        if (!contentText) {
+            alert('Please enter content description');
+            return;
+        }
+
+        showTagsStep('step-generating');
+        simulateTagsGeneration();
+    });
+
+    // Simulate tags generation
+    function simulateTagsGeneration() {
+        let progress = 0;
+        const progressBar = document.querySelector('#step-generating .progress-fill');
+        const progressText = document.querySelector('#step-generating .progress-text');
+
+        const interval = setInterval(() => {
+            progress += 5;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${progress}%`;
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    showTagsStep('step-results');
+                    displayGeneratedTags();
+                }, 500);
+            }
+        }, 100);
+    }
+
+    // Display generated hashtags
+    function displayGeneratedTags() {
+        const hashtagLists = document.querySelectorAll('.hashtag-list');
+        
+        // Mock data for demonstration
+        const mockHashtags = {
+            trending: ['#trending', '#viral', '#instagood', '#trendingnow', '#popular'],
+            niche: ['#digitalmarketing', '#socialmediamarketing', '#contentcreation', '#marketingtips', '#creators'],
+            location: ['#newyork', '#nyc', '#manhattan', '#brooklyn', '#queens']
+        };
+
+        hashtagLists.forEach(list => {
+            list.innerHTML = '';
+            const type = list.closest('.hashtag-group').querySelector('h4').textContent.toLowerCase();
+            const hashtags = mockHashtags[type.split(' ')[0]] || [];
+            
+            hashtags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.className = 'hashtag-item';
+                tagElement.innerHTML = `
+                    <span>${tag}</span>
+                    <button class="copy-hashtag" title="Copy">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                `;
+                list.appendChild(tagElement);
+            });
+        });
+
+        // Add copy functionality to individual hashtags
+        document.querySelectorAll('.copy-hashtag').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const hashtag = e.target.closest('.hashtag-item').querySelector('span').textContent;
+                navigator.clipboard.writeText(hashtag);
+                showCopyFeedback(e.target);
+            });
+        });
+    }
+
+    // Copy all hashtags
+    document.querySelector('.copy-all-btn').addEventListener('click', () => {
+        const allHashtags = Array.from(document.querySelectorAll('.hashtag-item span'))
+            .map(span => span.textContent)
+            .join(' ');
+        navigator.clipboard.writeText(allHashtags);
+        showCopyFeedback(document.querySelector('.copy-all-btn'));
+    });
+
+    // Generate more hashtags
+    document.querySelector('.refresh-btn').addEventListener('click', () => {
+        showTagsStep('step-generating');
+        simulateTagsGeneration();
+    });
+
+    // Show copy feedback
+    function showCopyFeedback(element) {
+        const originalText = element.innerHTML;
+        element.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => {
+            element.innerHTML = originalText;
+        }, 1000);
+    }
+}); 

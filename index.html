@@ -573,20 +573,33 @@
 
                     <!-- Content Optimization Tool -->
                     <div class="ai-tool-card" data-tool="optimize">
-                        <div class="tool-icon">
-                            <i class="fas fa-wand-magic"></i>
+                        <div class="ai-tool-header">
+                            <div class="ai-tool-icon">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h3 class="ai-tool-title">Content Optimization</h3>
                         </div>
-                        <h3>Content Optimization</h3>
-                        <p>Optimize your content for better engagement and reach</p>
+                        <p class="ai-tool-description">Optimize your content for better engagement and reach</p>
                         <div class="ai-tool-features">
-                            <span class="feature-tag"><i class="fas fa-chart-bar"></i> Performance</span>
-                            <span class="feature-tag"><i class="fas fa-eye"></i> SEO</span>
-                            <span class="feature-tag"><i class="fas fa-users"></i> Engagement</span>
+                            <span class="feature-tag">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Performance
+                            </span>
+                            <span class="feature-tag">
+                                <i class="fas fa-search"></i>
+                                SEO
+                            </span>
+                            <span class="feature-tag">
+                                <i class="fas fa-heart"></i>
+                                Engagement
+                            </span>
                         </div>
-                        <button class="btn-primary optimize-btn">
-                            <i class="fas fa-magic"></i>
-                            Optimize
-                        </button>
+                        <div class="ai-tool-actions">
+                            <button class="ai-tool-btn ai-tool-btn-primary" id="optimize-btn">
+                                <i class="fas fa-magic"></i>
+                                Optimize
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Hashtag Generator Tool -->
@@ -607,8 +620,107 @@
                         </button>
                     </div>
                 </div>
+            </div>
 
-                <!-- AI Tool Modals -->
+            <!-- Optimization Modal -->
+            <div id="optimize-modal" class="ai-tool-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2><i class="fas fa-magic"></i> Optimize Content</h2>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="step-input" class="optimization-step active">
+                            <div class="optimization-input-group">
+                                <label for="content-text">Your Content</label>
+                                <textarea id="content-text" rows="6" placeholder="Paste your content here..."></textarea>
+                            </div>
+                            <div class="optimization-input-group">
+                                <label for="content-type">Content Type</label>
+                                <select id="content-type">
+                                    <option value="">Select content type</option>
+                                    <option value="blog">Blog Post</option>
+                                    <option value="video">Video Script</option>
+                                    <option value="social">Social Media Post</option>
+                                    <option value="email">Email Newsletter</option>
+                                </select>
+                            </div>
+                            <div class="optimization-input-group">
+                                <label for="target-platform">Target Platform</label>
+                                <select id="target-platform">
+                                    <option value="">Select platform</option>
+                                    <option value="website">Website</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="linkedin">LinkedIn</option>
+                                    <option value="twitter">Twitter</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="step-optimizing" class="optimization-step">
+                            <div class="generating-content">
+                                <div class="loading-spinner"></div>
+                                <h3>Optimizing Your Content</h3>
+                                <p>Our AI is analyzing and enhancing your content for better engagement...</p>
+                                <div class="optimization-flow">
+                                    <div class="optimization-step">
+                                        <i class="fas fa-search"></i>
+                                        <span>Analyzing Content</span>
+                                    </div>
+                                    <div class="optimization-step">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Checking Engagement</span>
+                                    </div>
+                                    <div class="optimization-step">
+                                        <i class="fas fa-magic"></i>
+                                        <span>Optimizing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-results" class="optimization-step">
+                            <div class="results-header">
+                                <h3>Optimization Results</h3>
+                                <div class="results-actions">
+                                    <button class="refresh-btn">
+                                        <i class="fas fa-sync-alt"></i>
+                                        Re-optimize
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="optimization-metrics">
+                                <div class="metric-card">
+                                    <i class="fas fa-chart-line"></i>
+                                    <h4>Engagement Score</h4>
+                                    <p class="metric-value">85%</p>
+                                    <p class="metric-description">High potential for audience interaction</p>
+                                </div>
+                                <div class="metric-card">
+                                    <i class="fas fa-eye"></i>
+                                    <h4>Readability</h4>
+                                    <p class="metric-value">92%</p>
+                                    <p class="metric-description">Easy to understand</p>
+                                </div>
+                                <div class="metric-card">
+                                    <i class="fas fa-bullseye"></i>
+                                    <h4>SEO Score</h4>
+                                    <p class="metric-value">78%</p>
+                                    <p class="metric-description">Good search visibility</p>
+                                </div>
+                            </div>
+                            <div class="optimization-suggestions">
+                                <h4>Suggestions for Improvement</h4>
+                                <ul class="suggestion-list">
+                                    <!-- Suggestions will be dynamically inserted here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn modal-btn-secondary" id="cancel-optimize-btn">Cancel</button>
+                        <button class="modal-btn modal-btn-primary" id="start-optimize-btn">Start Optimization</button>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -617,5 +729,196 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/main.js"></script>
     <script src="js/schedule.js"></script>
+
+    <!-- Generate Ideas Modal -->
+    <div id="ideas-modal" class="ai-tool-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-lightbulb"></i> Generate Content Ideas</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="step-requirements" class="idea-step active">
+                    <div class="idea-input-group">
+                        <label for="topic">Topic or Keyword</label>
+                        <input type="text" id="topic" placeholder="Enter your topic or keyword">
+                    </div>
+                    <div class="idea-input-group">
+                        <label for="content-type">Content Type</label>
+                        <select id="content-type">
+                            <option value="">Select content type</option>
+                            <option value="blog">Blog Post</option>
+                            <option value="video">Video Script</option>
+                            <option value="social">Social Media Post</option>
+                            <option value="email">Email Newsletter</option>
+                        </select>
+                    </div>
+                    <div class="idea-input-group">
+                        <label for="tone">Content Tone</label>
+                        <select id="tone">
+                            <option value="">Select tone</option>
+                            <option value="professional">Professional</option>
+                            <option value="casual">Casual</option>
+                            <option value="humorous">Humorous</option>
+                            <option value="educational">Educational</option>
+                        </select>
+                    </div>
+                    <div class="idea-input-group">
+                        <label>Target Audience</label>
+                        <div class="format-grid">
+                            <div class="format-option">
+                                <i class="fas fa-users"></i>
+                                <span>General</span>
+                            </div>
+                            <div class="format-option">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Business</span>
+                            </div>
+                            <div class="format-option">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Students</span>
+                            </div>
+                            <div class="format-option">
+                                <i class="fas fa-code"></i>
+                                <span>Developers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="step-generating" class="idea-step">
+                    <div class="generating-content">
+                        <div class="loading-spinner"></div>
+                        <h3>Generating Content Ideas</h3>
+                        <p>Our AI is analyzing your requirements and creating unique content ideas...</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <p class="progress-text">0%</p>
+                    </div>
+                </div>
+                <div id="step-results" class="idea-step">
+                    <div class="results-header">
+                        <h3>Generated Ideas</h3>
+                        <div class="results-actions">
+                            <button class="refresh-btn">
+                                <i class="fas fa-sync-alt"></i>
+                                Generate More
+                            </button>
+                            <button class="save-all-btn">
+                                <i class="fas fa-save"></i>
+                                Save All
+                            </button>
+                        </div>
+                    </div>
+                    <div class="generated-ideas">
+                        <!-- Ideas will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancel-btn">Cancel</button>
+                <button class="modal-btn modal-btn-primary" id="generate-btn">Generate Ideas</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Tags Modal -->
+    <div id="tags-modal" class="ai-tool-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-hashtag"></i> Generate Hashtags</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="step-input" class="tags-step active">
+                    <div class="tags-input-group">
+                        <label for="content-text">Content Description</label>
+                        <textarea id="content-text" rows="4" placeholder="Describe your content to generate relevant hashtags..."></textarea>
+                    </div>
+                    <div class="tags-input-group">
+                        <label for="platform">Platform</label>
+                        <select id="platform">
+                            <option value="">Select platform</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="linkedin">LinkedIn</option>
+                        </select>
+                    </div>
+                    <div class="tags-input-group">
+                        <label>Hashtag Types</label>
+                        <div class="format-grid">
+                            <div class="format-option">
+                                <i class="fas fa-fire"></i>
+                                <span>Trending</span>
+                            </div>
+                            <div class="format-option">
+                                <i class="fas fa-tag"></i>
+                                <span>Niche</span>
+                            </div>
+                            <div class="format-option">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location</span>
+                            </div>
+                            <div class="format-option">
+                                <i class="fas fa-hashtag"></i>
+                                <span>Branded</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="step-generating" class="tags-step">
+                    <div class="generating-content">
+                        <div class="loading-spinner"></div>
+                        <h3>Generating Hashtags</h3>
+                        <p>Our AI is analyzing your content and creating relevant hashtags...</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <p class="progress-text">0%</p>
+                    </div>
+                </div>
+                <div id="step-results" class="tags-step">
+                    <div class="results-header">
+                        <h3>Generated Hashtags</h3>
+                        <div class="results-actions">
+                            <button class="refresh-btn">
+                                <i class="fas fa-sync-alt"></i>
+                                Generate More
+                            </button>
+                            <button class="copy-all-btn">
+                                <i class="fas fa-copy"></i>
+                                Copy All
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hashtag-groups">
+                        <div class="hashtag-group">
+                            <h4><i class="fas fa-fire"></i> Trending Hashtags</h4>
+                            <div class="hashtag-list">
+                                <!-- Trending hashtags will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        <div class="hashtag-group">
+                            <h4><i class="fas fa-tag"></i> Niche Hashtags</h4>
+                            <div class="hashtag-list">
+                                <!-- Niche hashtags will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        <div class="hashtag-group">
+                            <h4><i class="fas fa-map-marker-alt"></i> Location Hashtags</h4>
+                            <div class="hashtag-list">
+                                <!-- Location hashtags will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancel-tags-btn">Cancel</button>
+                <button class="modal-btn modal-btn-primary" id="generate-tags-btn">Generate Hashtags</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 
