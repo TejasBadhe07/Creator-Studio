@@ -145,33 +145,32 @@ function generateCalendar() {
     for (let day = 1; day <= lastDay.getDate(); day++) {
         const dayCell = document.createElement('div');
         dayCell.className = 'calendar-day';
-        dayCell.textContent = day;
+        
+        // Create day number container
+        const dayNumber = document.createElement('div');
+        dayNumber.className = 'day-number';
+        dayNumber.textContent = day;
+        dayCell.appendChild(dayNumber);
+        
+        // Create content container
+        const dayContent = document.createElement('div');
+        dayContent.className = 'day-content';
+        dayCell.appendChild(dayContent);
         
         // Highlight today
-        if (day === today.getDate()) {
+        if (day === today.getDate() && 
+            currentMonth === today.getMonth() && 
+            currentYear === today.getFullYear()) {
             dayCell.classList.add('today');
         }
         
         // Add random content indicators
         if (Math.random() > 0.7) {
-            const contentIndicator = document.createElement('div');
-            contentIndicator.className = 'content-indicator';
-            dayCell.appendChild(contentIndicator);
-            
-            // Add tooltip
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = `${Math.floor(Math.random() * 5) + 1} posts scheduled`;
-            dayCell.appendChild(tooltip);
-            
-            // Show tooltip on hover
-            dayCell.addEventListener('mouseenter', () => {
-                tooltip.classList.add('show');
-            });
-            
-            dayCell.addEventListener('mouseleave', () => {
-                tooltip.classList.remove('show');
-            });
+            const contentItem = document.createElement('div');
+            contentItem.className = 'content-item';
+            contentItem.textContent = 'Content';
+            dayContent.appendChild(contentItem);
+            dayCell.classList.add('has-content');
         }
         
         calendarGrid.appendChild(dayCell);
@@ -179,7 +178,9 @@ function generateCalendar() {
 }
 
 // Initialize calendar
-generateCalendar();
+document.addEventListener('DOMContentLoaded', () => {
+    generateCalendar();
+});
 
 // Notification Badge Animation
 const notificationBadge = document.querySelector('.notification-badge');
